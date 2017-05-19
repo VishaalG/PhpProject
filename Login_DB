@@ -1,0 +1,59 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "vish@aal94";
+$dbname = "library";
+
+// Create connection
+$conn = new mysqli($localhost, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$loginUserName = $_POST['uname'];
+$loginPassword = $_POST['pword'];
+
+$sql = "SELECT UserName FROM User_Credentials WHERE UserName = '" . $loginUserName . "' and Password='" . $loginPassword . "';";
+
+$result = $conn->query($sql);
+if (mysqli_num_rows($result) > 0)
+	{
+	echo "Valid User";
+	exit;
+	}
+	else
+	{
+	echo "Invalid User";
+	}
+
+	/*User High Score 
+
+	$UserScore = INSERT INTO `library`.`user_highscores`(`Score_at_the_time`)VALUES(<{Gdevelop Global Variable}>);
+	$HighScore = SELECT MAX(User_Highscore) FROM user_highscores;
+	if($UserScore>$HighScore)
+	{
+		echo "New High score is .$HighScore;"
+	}
+	else {
+		echo "The score is .$UserScore;"
+	}
+
+ /*To check the user authentication
+if(isset($_POST['uname'])  && !empty($_POST['uname']) && isset($_POST['pword']) && !empty($_POST['pword'])){
+	echo "got the data" . $password;
+} else {
+	echo "data is not sufficient";
+}
+
+/* to update user score to db
+if(isset($_POST['uname'])  && !empty($_POST['uname']) && isset($_POST['pword']) && !empty($_POST['pword'])){
+	echo "got the data";
+} else {
+	echo "data is not sufficient";
+}*/
+
+
+$conn->close();
+?>
+
